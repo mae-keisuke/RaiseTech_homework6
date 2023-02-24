@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,10 +19,8 @@ public class HelloController {
     @GetMapping("/now")
     public String time() {
         LocalDateTime now = LocalDateTime.now();
-        int hour = now.getHour();
-        int minutes = now.getMinute();
-        int sec = now.getSecond();
-        return hour + "時" + minutes + "分" + sec + "秒";
+        DateTimeFormatter nowFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return nowFormat.format(now);
     }
 
     @GetMapping("/greeting")
