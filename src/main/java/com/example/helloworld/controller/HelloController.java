@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class HelloController {
+    private static final Map<String, String> COUNTRY_TO_LANGUAGE = Map.of("Japan", "こんにちは", "America", "Hello！", "France", "Bonjour！", "Italy", "Ciao！");
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH時mm分ss秒");
+
     @GetMapping("/hello")
     public String hello() {
         return "Hello World";
@@ -19,22 +21,16 @@ public class HelloController {
     @GetMapping("/now")
     public String time() {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter nowFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-        return nowFormat.format(now);
+        return dateTimeFormatter.format(now);
     }
+
 
     @GetMapping("/greeting")
     public String country(@RequestParam("country") String country) {
-        Map<String, String> countryLanguage = new HashMap<>();
-        countryLanguage.put("Japan", "こんにちは！");
-        countryLanguage.put("America", "Hello！");
-        countryLanguage.put("France", "Bonjour！");
-        countryLanguage.put("Italy", "Ciao！");
-
-        if (countryLanguage.get(country) == null) {
-            return "リストにありません。再検索してください。";
+        if (COUNTRY_TO_LANGUAGE.containsKey(country)) {
+            return COUNTRY_TO_LANGUAGE.get(country);
         } else {
-            return countryLanguage.get(country);
+            return "リストにありません。再検索してください。";
         }
     }
 }
