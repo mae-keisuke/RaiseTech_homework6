@@ -17,7 +17,7 @@ public class HelloController {
         DateTimeFormatter.ofPattern("HH時mm分ss秒");
 
     @GetMapping("/hello")
-    public String hello() {
+    public String Hello() {
         return "Hello World";
     }
 
