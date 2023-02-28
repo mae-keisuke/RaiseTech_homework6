@@ -17,7 +17,7 @@ public class HelloController {
         DateTimeFormatter.ofPattern("HH時mm分ss秒");
 
     @GetMapping("/hello")
-    public String hello() {
+    public String Hello() {
         return "Hello World";
     }
 
@@ -26,7 +26,6 @@ public class HelloController {
         LocalDateTime now = LocalDateTime.now();
         return dateTimeFormatter.format(now);
     }
-
 
     @GetMapping("/greeting")
     public String country(@RequestParam("country") String country) {
