@@ -27,7 +27,6 @@ public class HelloController {
         return dateTimeFormatter.format(now);
     }
 
-
     @GetMapping("/greeting")
     public String country(@RequestParam("country") String country) {
         if (COUNTRY_TO_LANGUAGE.containsKey(country)) {
